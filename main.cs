@@ -15,10 +15,10 @@ namespace RhythmGameConsole
 
             // Set up a steady 120 BPM tempo track
             Conductor conductor = new Conductor(bpm: 120f);//initialize the conductor with a beats per minute value of 120
-            
+
             // Map out exactly on which beat thresholds an active note should cross the target line
             List<float> noteTargetBeats = new List<float> { 2.0f, 4.0f, 6.0f, 8.0f, 10.0f, 12.0f, 14.0f, 16.0f, 18.0f, 20.0f };//define the beats at which notes will appear in the game
-            
+
             GameEngine game = new GameEngine(conductor, noteTargetBeats);//initialize the game engine with the conductor and the list of note beats
             game.Start();//start the game loop, which will run until the player either completes the track or fails by losing all health
         }
@@ -60,7 +60,7 @@ namespace RhythmGameConsole
         private readonly Conductor _conductor;
         private readonly List<float> _noteBeats;
         private readonly HashSet<int> _processedNotes = new HashSet<int>();
-        
+
         // Exact allowable accuracy ranges measured outward in total seconds
         private const float PerfectWindow = 0.05f;// 50 milliseconds for a perfect hit
         private const float GoodWindow = 0.12f;// 120 milliseconds for a good hit
@@ -186,7 +186,7 @@ namespace RhythmGameConsole
                 if (_processedNotes.Contains(i)) continue;
 
                 float targetSeconds = _noteBeats[i] * _conductor.SecondsPerBeat;
-                
+
                 // Clear out unhit notes that slipped past the window completely
                 if (currentSeconds - targetSeconds > MissWindow)
                 {
@@ -202,10 +202,10 @@ namespace RhythmGameConsole
         private void UpdateComboMultiplier()//method to update the combo multiplier based on the current combo count, with defined thresholds for increasing multipliers
         {
             // Milestone combo tier thresholds (Max 4x)
-            if (_combo >= 30)       _comboMultiplier = 4;
-            else if (_combo >= 20)  _comboMultiplier = 3;
-            else if (_combo >= 10)  _comboMultiplier = 2;
-            else                    _comboMultiplier = 1;
+            if (_combo >= 30) _comboMultiplier = 4;
+            else if (_combo >= 20) _comboMultiplier = 3;
+            else if (_combo >= 10) _comboMultiplier = 2;
+            else _comboMultiplier = 1;
         }
 
         private void RenderTrack()//method to render the visual representation of the game track, including notes, target line, score, combo, and health bar
