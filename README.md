@@ -1,6 +1,6 @@
 # C# Rhythm Game
 
-This is a rhythm game written in C#.
+This is a rhythm game written in C#. It features scoring system with time bonus and combo and health multipliers.
 
 ### Getting Started
 
